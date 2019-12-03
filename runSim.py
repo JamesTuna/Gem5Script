@@ -29,7 +29,7 @@ for bench in benchMarks:
 				for simID in range(numFiles[bench]):
 					outDir = './'+bench+'/'+c_size+'_'+assoc+'_'+rep+'_simID'+str(simID)
 					ckptdir = CHKPT_DIR + bench + '.m5out'
-					cmd = [EMU,'-d',SYSCFG,'--caches','--l2cache','--l2_size='+c_size]
+					cmd = [EMU,'-d',outDir,SYSCFG,'--caches','--l2cache','--l2_size='+c_size]
 					cmd += ['--l2_assoc='+assoc,'--l2tag='+rep,'--checkpoint-dir',ckptdir]
 					cmd += ['--restore-simpoint-checkpoint']
 					cmd += ['-r',str(simID+1),'--restore-with-cpu=DerivO3CPU']
