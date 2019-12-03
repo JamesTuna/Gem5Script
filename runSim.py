@@ -38,4 +38,6 @@ for bench in benchMarks:
 					print('-------------------------------------------')
 					print('c_size',c_size,'assoc',assoc,'policy',rep)
 					print('-------------------------------------------')
-					print(' '.join(cmd))
+					cmd = ' '.join(cmd)
+					print(cmd)
+					os.system(cmd)
