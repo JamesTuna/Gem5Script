@@ -21,9 +21,9 @@ for bench in benchMarks:
 		for assoc in associativity:
 			for rep in rep_policy:
 				outfile = open('extracted_data/'+bench+'/'+c_size+'_'+assoc+'_'+rep+'.txt','w')
+				overall_cpi = 0
+				overall_weight = 0
 				for simID in range(numFiles[bench]):
-					overall_cpi = 0
-					overall_weight = 0
 					outfile.write('simpoint %s\n'%simID)
 					fileDir = './'+bench+'/'+c_size+'_'+assoc+'_'+rep+'_simID'+str(simID)
 					print("Analyse stats.txt under directory %s..."%(fileDir))
