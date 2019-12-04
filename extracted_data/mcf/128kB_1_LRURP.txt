@@ -1,0 +1,12 @@
+simpoint 0
+	Total number of instructions: 40000001
+	Total number of cycles: 59834596
+simpoint 1
+	Total number of instructions: 40000002
+	Total number of cycles: 58544177
+simpoint 2
+	Total number of instructions: 40000002
+	Total number of cycles: 57924627
+simpoint 3
+	Total number of instructions: 40000001
+	Total number of cycles: 67188577

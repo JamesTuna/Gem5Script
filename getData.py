@@ -20,10 +20,10 @@ for bench in benchMarks:
 	for c_size in cache_size:
 		for assoc in associativity:
 			for rep in rep_policy:
-				overall_cpi = 0
-				overall_weight = 0
 				outfile = open('extracted_data/'+bench+'/'+c_size+'_'+assoc+'_'+rep+'.txt','w')
 				for simID in range(numFiles[bench]):
+					overall_cpi = 0
+					overall_weight = 0
 					outfile.write('simpoint %s\n'%simID)
 					fileDir = './'+bench+'/'+c_size+'_'+assoc+'_'+rep+'_simID'+str(simID)
 					print("Analyse stats.txt under directory %s..."%(fileDir))
@@ -56,5 +56,7 @@ for bench in benchMarks:
 							CPI = cycles/insts
 							overall_cpi += weights[bench][simID] * CPI
 							overall_weight += weights[bench][simID]
-							
+					if overall_weight == 0:
+						print(fileDir+"/"+"stats.txt"+": 0 overall_weight, program exits")
+						exit(1)
 					outfile.write('weighted_cpi:%s\n'%(overall_cpi/overall_weight))
