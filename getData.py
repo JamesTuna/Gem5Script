@@ -4,7 +4,6 @@ import os
 
 benchMarks = ['bzip2','cactusADM','hmmer','mcf','sphinx3']
 numFiles = {'bzip2':4,'cactusADM':5,'hmmer':4,'mcf':4,'sphinx3':5}
-FULL_EXT = TUNE + '.' + EXT
 
 
 cache_size = ['128kB','256kB','512kB']
@@ -18,12 +17,12 @@ for bench in benchMarks:
 	for c_size in cache_size:
 		for assoc in associativity:
 			for rep in rep_policy:
-				outfile = open('extracted_data/'+bench+'/'+c_size+'_'+assoc+'_'+rep+'.txt')
+				outfile = open('extracted_data/'+bench+'/'+c_size+'_'+assoc+'_'+rep+'.txt','w')
 				for simID in range(numFiles[bench]):
 					outfile.write('simpoint %s\n'%simID)
 					fileDir = './'+bench+'/'+c_size+'_'+assoc+'_'+rep+'_simID'+str(simID)
 					print("Analyse stats.txt under directory %s..."%(fileDir))
-					with open (fileDir+"./"+"stats.txt") as f:
+					with open (fileDir+"/"+"stats.txt") as f:
 						target1 = 'system.switch_cpus.numCycles'
 						target2 = 'sim_insts'
 						count1 = 0
