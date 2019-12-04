@@ -52,8 +52,9 @@ for bench in benchMarks:
 						if count2 != 2:
 							print(target2,'appears',count2,'times, program exits')
 							#exit(1)
-						if count1==2 && count2==2:
+						if count1==2 and count2==2:
 							CPI = cycles/insts
 							overall_cpi += weights[bench][simID] * CPI
-							overall_weight += weights[bench]
+							overall_weight += weights[bench][simID]
+							
 					outfile.write('weighted_cpi:%s\n'%(overall_cpi/overall_weight))
