@@ -39,3 +39,11 @@ for bench in benchMarks:
 								if count2 == 2:
 									insts = int(line.split()[1])
 									outfile.write("\tTotal number of instructions: %s\n"%insts)
+							if line == '':
+								break
+						if count1 != 2:
+							print(target1,'appears',count1,'times, program exits')
+							exit(1)
+						if count2 != 2:
+							print(target2,'appears',count2,'times, program exits')
+							exit(1)
