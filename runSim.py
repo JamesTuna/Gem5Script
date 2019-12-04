@@ -34,7 +34,11 @@ for bench in benchMarks:
 					cmd += ['--restore-simpoint-checkpoint']
 					cmd += ['-r',str(simID+1),'--restore-with-cpu=DerivO3CPU']
 					cmd += ['-c','/home/james/Desktop/bench/'+bench+'_'+FULL_EXT]
-					cmd += ['-o','/home/james/Desktop/bench/'+args[bench]]
+					if bench == 'sphinx3':
+						cmd += ['-o']
+						cmd += ["\"/misc/scratch/thung/bench/ctlfile . /misc/sratch/thung/bench/args.an4\""]
+					else:
+						cmd += ['-o','/home/james/Desktop/bench/'+args[bench]]
 					print('-------------------------------------------')
 					print('c_size',c_size,'assoc',assoc,'policy',rep)
 					print('-------------------------------------------')
