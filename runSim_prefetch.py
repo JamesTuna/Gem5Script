@@ -1,0 +1,48 @@
+#! /usr/bin/env python3
+
+import os
+
+benchMarks = ['bzip2','cactusADM','hmmer','mcf','sphinx3']
+
+numFiles = {'bzip2':4,'cactusADM':5,'hmmer':4,'mcf':4,'sphinx3':5}
+
+numBenches = 5
+
+args = {'bzip2':'dryer.jpg','cactusADM':'benchADM.par','hmmer':'bombesin.hmm','mcf':'inp.in','sphinx3':'ctlfile . args.an4'}
+
+EMU = '/home/james/Desktop/gem5/build/X86/gem5.opt'
+TUNE = 'base'
+EXT = 'amd64-ee382n1'
+CHKPT_DIR = '/home/james/Desktop/bench_backup/bench/'
+FULL_EXT = TUNE + '.' + EXT
+SYSCFG = '/home/james/Desktop/gem5/configs/example/se.py'
+
+cache_size = ['256kB'] # modify this line
+associativity = ['2'] # modify this line
+rep_policy = ['BRRIPRP','LRURP'] # modify this line
+
+for bench in benchMarks:
+	os.system('mkdir ' + bench)
+	for c_size in cache_size:
+		for assoc in associativity:
+			for rep in rep_policy:
+				for simID in range(numFiles[bench]):
+					outDir = './'+bench+'/'+'prefetch_'+c_size+'_'+assoc+'_'+rep+'_simID'+str(simID) # modify this line
+					ckptdir = CHKPT_DIR + bench + '.m5out'
+					cmd = [EMU,'-d',outDir,SYSCFG,'--caches','--l2cache','--l2_size='+c_size]
+					cmd += ['--l2_assoc='+assoc,'--l2tag='+rep,'--checkpoint-dir',ckptdir]
+					cmd += ["--prefetch=\"on\""]  # modify this line
+					cmd += ['--restore-simpoint-checkpoint']
+					cmd += ['-r',str(simID+1),'--restore-with-cpu=DerivO3CPU']
+					cmd += ['-c','/home/james/Desktop/bench/'+bench+'_'+FULL_EXT]
+					if bench == 'sphinx3':
+						cmd += ['-o']
+						cmd += ["\"/misc/scratch/thung/bench/ctlfile . /misc/sratch/thung/bench/args.an4\""]
+					else:
+						cmd += ['-o','/home/james/Desktop/bench/'+args[bench]]
+					print('-------------------------------------------')
+					print('c_size',c_size,'assoc',assoc,'policy',rep)
+					print('-------------------------------------------')
+					cmd = ' '.join(cmd)
+					print(cmd)
+					os.system(cmd)
