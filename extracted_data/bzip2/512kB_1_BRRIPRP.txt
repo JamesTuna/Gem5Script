@@ -10,3 +10,4 @@ simpoint 2
 simpoint 3
 	Total number of instructions: 40000002
 	Total number of cycles: 54029514
+weighted_cpi:1.6246875346495278

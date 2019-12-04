@@ -56,7 +56,9 @@ for bench in benchMarks:
 							CPI = cycles/insts
 							overall_cpi += weights[bench][simID] * CPI
 							overall_weight += weights[bench][simID]
-					if overall_weight == 0:
-						print(fileDir+"/"+"stats.txt"+": 0 overall_weight, program exits")
-						exit(1)
-					outfile.write('weighted_cpi:%s\n'%(overall_cpi/overall_weight))
+
+				if overall_weight == 0:
+					print(c_size+"_"+assoc+"_"+rep+" overall weight is 0")
+					exit(1)
+
+				outfile.write('weighted_cpi:%s\n'%(overall_cpi/overall_weight))
