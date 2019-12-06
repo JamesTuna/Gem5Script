@@ -10,7 +10,7 @@ numFiles = {'bzip2':4,'cactusADM':5,'hmmer':4,'mcf':4,'sphinx3':5}
 
 
 cache_size = ['128kB','256kB','512kB']
-associativity = ['1','2','4']
+associativity = ['2','4','8']
 rep_policy = ['BRRIPRP','LRURP']
 
 os.system('mkdir extracted_data')
