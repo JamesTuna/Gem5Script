@@ -1,0 +1,17 @@
+simpoint 0
+	Total number of instructions: 30000000
+	CPI: 1.25848
+	Total number of cycles: 37754400
+simpoint 1
+	Total number of instructions: 30000003
+	CPI: 1.281472
+	Total number of cycles: 38444153
+simpoint 2
+	Total number of instructions: 30000001
+	CPI: 1.247394
+	Total number of cycles: 37421833
+simpoint 3
+	Total number of instructions: 30000000
+	CPI: 4.658535
+	Total number of cycles: 139756046
+weighted_cpi:2.830531925454476

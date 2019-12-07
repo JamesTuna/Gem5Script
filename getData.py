@@ -6,6 +6,7 @@ import pickle
 weights = {"bzip2":[0.249573,0.176068,0.112821,0.461538],"hmmer":[0.018519,0.388889,0.203704,0.388889],"cactusADM":[0.006173,0.006173,0.376543,0.555556,0.055556],"mcf":[0.116505,0.601942,0.213592,0.067961],"sphinx3":[0.231481,0.055556,0.106481,0.259259,0.347222]}
 
 benchMarks = ['bzip2','cactusADM','hmmer','mcf','sphinx3']
+benchMarks = ['bzip2','hmmer','sphinx3']
 numFiles = {'bzip2':4,'cactusADM':5,'hmmer':4,'mcf':4,'sphinx3':5}
 
 
@@ -29,9 +30,12 @@ for bench in benchMarks:
 					print("Analyse stats.txt under directory %s..."%(fileDir))
 					with open (fileDir+"/"+"stats.txt") as f:
 						target1 = 'system.switch_cpus.numCycles'
-						target2 = 'sim_insts'
+						target2 = 'system.switch_cpus.committedInsts'
+						target3 = 'system.switch_cpus.cpi_total'
 						count1 = 0
 						count2 = 0
+						count3 = 0
+						cpi = 0
 						while(True):
 							line = f.readline()
 							if line.startswith(target1):
@@ -44,6 +48,11 @@ for bench in benchMarks:
 								if count2 == 2:
 									insts = int(line.split()[1])
 									outfile.write("\tTotal number of instructions: %s\n"%insts)
+							elif line.startswith(target3):
+								count3 += 1
+								if count3 == 2:
+									cpi = float(line.split()[1])
+									outfile.write("\tCPI: %s\n"%cpi)
 							if line == '':
 								break
 						if count1 != 2:
@@ -52,6 +61,8 @@ for bench in benchMarks:
 						if count2 != 2:
 							print(target2,'appears',count2,'times, program exits')
 							#exit(1)
+						if count3 != 2:
+							print(target2,'appears',count3,'times, program exits')
 						if count1==2 and count2==2:
 							CPI = cycles/insts
 							overall_cpi += weights[bench][simID] * CPI

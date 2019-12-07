@@ -227,8 +227,10 @@
         }, 
         "switch_cpus": [
             {
-                "do_statistics_insts": true, 
-                "numThreads": 1, 
+                "SQEntries": 32, 
+                "smtLSQThreshold": 100, 
+                "fetchTrapLatency": 1, 
+                "iewToRenameDelay": 1, 
                 "itb": {
                     "name": "itb", 
                     "eventq_index": 0, 
@@ -252,125 +254,6 @@
                     "type": "X86TLB", 
                     "size": 64
                 }, 
-                "power_gating_on_idle": false, 
-                "function_trace": false, 
-                "do_checkpoint_insts": true, 
-                "cxx_class": "AtomicSimpleCPU", 
-                "system": "system", 
-                "clk_domain": "system.cpu_clk_domain", 
-                "function_trace_start": 0, 
-                "cpu_id": 0, 
-                "width": 1, 
-                "checker": null, 
-                "eventq_index": 0, 
-                "default_p_state": "UNDEFINED", 
-                "p_state_clk_gate_max": 1000000000000, 
-                "do_quiesce": true, 
-                "type": "AtomicSimpleCPU", 
-                "profile": 0, 
-                "p_state_clk_gate_bins": 20, 
-                "p_state_clk_gate_min": 1000, 
-                "syscallRetryLatency": 10000, 
-                "interrupts": [], 
-                "socket_id": 0, 
-                "power_model": [], 
-                "max_insts_all_threads": 0, 
-                "simulate_data_stalls": false, 
-                "path": "system.switch_cpus", 
-                "pwr_gating_latency": 300, 
-                "switched_out": true, 
-                "workload": [
-                    "system.cpu.workload"
-                ], 
-                "name": "switch_cpus", 
-                "wait_for_remote_gdb": false, 
-                "dtb": {
-                    "name": "dtb", 
-                    "eventq_index": 0, 
-                    "cxx_class": "X86ISA::TLB", 
-                    "walker": {
-                        "name": "walker", 
-                        "p_state_clk_gate_min": 1000, 
-                        "p_state_clk_gate_bins": 20, 
-                        "cxx_class": "X86ISA::Walker", 
-                        "clk_domain": "system.cpu_clk_domain", 
-                        "power_model": [], 
-                        "system": "system", 
-                        "eventq_index": 0, 
-                        "default_p_state": "UNDEFINED", 
-                        "p_state_clk_gate_max": 1000000000000, 
-                        "path": "system.switch_cpus.dtb.walker", 
-                        "type": "X86PagetableWalker", 
-                        "num_squash_per_cycle": 4
-                    }, 
-                    "path": "system.switch_cpus.dtb", 
-                    "type": "X86TLB", 
-                    "size": 64
-                }, 
-                "simpoint_start_insts": [
-                    10000000, 
-                    40000000
-                ], 
-                "max_insts_any_thread": 0, 
-                "simulate_inst_stalls": false, 
-                "progress_interval": 0, 
-                "branchPred": null, 
-                "isa": [
-                    "system.cpu.isa"
-                ], 
-                "tracer": {
-                    "eventq_index": 0, 
-                    "path": "system.switch_cpus.tracer", 
-                    "type": "ExeTracer", 
-                    "name": "tracer", 
-                    "cxx_class": "Trace::ExeTracer"
-                }
-            }
-        ], 
-        "mem_mode": "timing", 
-        "name": "system", 
-        "init_param": 0, 
-        "system_port": {
-            "peer": "system.membus.slave[0]", 
-            "is_source": "True", 
-            "role": "GEM5 REQUESTER"
-        }, 
-        "kernel_extras": [], 
-        "load_addr_mask": 18446744073709551615, 
-        "cpu": [
-            {
-                "SQEntries": 32, 
-                "smtLSQThreshold": 100, 
-                "fetchTrapLatency": 1, 
-                "iewToRenameDelay": 1, 
-                "itb": {
-                    "name": "itb", 
-                    "eventq_index": 0, 
-                    "cxx_class": "X86ISA::TLB", 
-                    "walker": {
-                        "name": "walker", 
-                        "p_state_clk_gate_min": 1000, 
-                        "p_state_clk_gate_bins": 20, 
-                        "cxx_class": "X86ISA::Walker", 
-                        "clk_domain": "system.cpu_clk_domain", 
-                        "power_model": [], 
-                        "system": "system", 
-                        "eventq_index": 0, 
-                        "default_p_state": "UNDEFINED", 
-                        "p_state_clk_gate_max": 1000000000000, 
-                        "path": "system.cpu.itb.walker", 
-                        "type": "X86PagetableWalker", 
-                        "port": {
-                            "peer": "system.cpu.itb_walker_cache.cpu_side", 
-                            "is_source": "True", 
-                            "role": "GEM5 REQUESTER"
-                        }, 
-                        "num_squash_per_cycle": 4
-                    }, 
-                    "path": "system.cpu.itb", 
-                    "type": "X86TLB", 
-                    "size": 64
-                }, 
                 "fetchWidth": 8, 
                 "cpu_id": 0, 
                 "fetchToDecodeDelay": 1, 
@@ -384,44 +267,14 @@
                 "needsTSO": true, 
                 "smtIQThreshold": 100, 
                 "workload": [
-                    {
-                        "uid": 100, 
-                        "pid": 100, 
-                        "kvmInSE": false, 
-                        "cxx_class": "Process", 
-                        "executable": "/misc/scratch/thung/bench/hmmer_base.amd64-ee382n1", 
-                        "drivers": [], 
-                        "system": "system", 
-                        "gid": 100, 
-                        "eventq_index": 0, 
-                        "env": [], 
-                        "maxStackSize": 67108864, 
-                        "ppid": 0, 
-                        "type": "Process", 
-                        "cwd": "/misc/scratch/thung/hmmer_result", 
-                        "pgid": 100, 
-                        "simpoint": 0, 
-                        "euid": 100, 
-                        "input": "cin", 
-                        "path": "system.cpu.workload", 
-                        "name": "workload", 
-                        "cmd": [
-                            "/misc/scratch/thung/bench/hmmer_base.amd64-ee382n1", 
-                            "/misc/scratch/thung/bench/bombesin.hmm"
-                        ], 
-                        "errout": "cerr", 
-                        "useArchPT": false, 
-                        "egid": 100, 
-                        "release": "5.1.0", 
-                        "output": "cout"
-                    }
+                    "system.cpu.workload"
                 ], 
-                "name": "cpu", 
+                "name": "switch_cpus", 
                 "SSITSize": 1024, 
                 "activity": 0, 
                 "tracer": {
                     "eventq_index": 0, 
-                    "path": "system.cpu.tracer", 
+                    "path": "system.switch_cpus.tracer", 
                     "type": "ExeTracer", 
                     "name": "tracer", 
                     "cxx_class": "Trace::ExeTracer"
@@ -451,14 +304,14 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList0.opList", 
+                                    "path": "system.switch_cpus.fuPool.FUList0.opList", 
                                     "type": "OpDesc"
                                 }
                             ], 
                             "name": "FUList0", 
                             "eventq_index": 0, 
                             "cxx_class": "FUDesc", 
-                            "path": "system.cpu.fuPool.FUList0", 
+                            "path": "system.switch_cpus.fuPool.FUList0", 
                             "type": "FUDesc"
                         }, 
                         {
@@ -471,7 +324,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList1.opList0", 
+                                    "path": "system.switch_cpus.fuPool.FUList1.opList0", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -481,14 +334,14 @@
                                     "pipelined": false, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList1.opList1", 
+                                    "path": "system.switch_cpus.fuPool.FUList1.opList1", 
                                     "type": "OpDesc"
                                 }
                             ], 
                             "name": "FUList1", 
                             "eventq_index": 0, 
                             "cxx_class": "FUDesc", 
-                            "path": "system.cpu.fuPool.FUList1", 
+                            "path": "system.switch_cpus.fuPool.FUList1", 
                             "type": "FUDesc"
                         }, 
                         {
@@ -501,7 +354,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList2.opList0", 
+                                    "path": "system.switch_cpus.fuPool.FUList2.opList0", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -511,7 +364,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList2.opList1", 
+                                    "path": "system.switch_cpus.fuPool.FUList2.opList1", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -521,14 +374,14 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList2.opList2", 
+                                    "path": "system.switch_cpus.fuPool.FUList2.opList2", 
                                     "type": "OpDesc"
                                 }
                             ], 
                             "name": "FUList2", 
                             "eventq_index": 0, 
                             "cxx_class": "FUDesc", 
-                            "path": "system.cpu.fuPool.FUList2", 
+                            "path": "system.switch_cpus.fuPool.FUList2", 
                             "type": "FUDesc"
                         }, 
                         {
@@ -541,7 +394,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList3.opList0", 
+                                    "path": "system.switch_cpus.fuPool.FUList3.opList0", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -551,7 +404,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList3.opList1", 
+                                    "path": "system.switch_cpus.fuPool.FUList3.opList1", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -561,7 +414,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList3.opList2", 
+                                    "path": "system.switch_cpus.fuPool.FUList3.opList2", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -571,7 +424,7 @@
                                     "pipelined": false, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList3.opList3", 
+                                    "path": "system.switch_cpus.fuPool.FUList3.opList3", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -581,14 +434,14 @@
                                     "pipelined": false, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList3.opList4", 
+                                    "path": "system.switch_cpus.fuPool.FUList3.opList4", 
                                     "type": "OpDesc"
                                 }
                             ], 
                             "name": "FUList3", 
                             "eventq_index": 0, 
                             "cxx_class": "FUDesc", 
-                            "path": "system.cpu.fuPool.FUList3", 
+                            "path": "system.switch_cpus.fuPool.FUList3", 
                             "type": "FUDesc"
                         }, 
                         {
@@ -601,7 +454,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList4.opList0", 
+                                    "path": "system.switch_cpus.fuPool.FUList4.opList0", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -611,14 +464,14 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList4.opList1", 
+                                    "path": "system.switch_cpus.fuPool.FUList4.opList1", 
                                     "type": "OpDesc"
                                 }
                             ], 
                             "name": "FUList4", 
                             "eventq_index": 0, 
                             "cxx_class": "FUDesc", 
-                            "path": "system.cpu.fuPool.FUList4", 
+                            "path": "system.switch_cpus.fuPool.FUList4", 
                             "type": "FUDesc"
                         }, 
                         {
@@ -631,7 +484,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList00", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList00", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -641,7 +494,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList01", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList01", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -651,7 +504,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList02", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList02", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -661,7 +514,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList03", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList03", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -671,7 +524,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList04", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList04", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -681,7 +534,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList05", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList05", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -691,7 +544,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList06", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList06", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -701,7 +554,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList07", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList07", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -711,7 +564,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList08", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList08", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -721,7 +574,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList09", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList09", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -731,7 +584,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList10", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList10", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -741,7 +594,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList11", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList11", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -751,7 +604,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList12", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList12", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -761,7 +614,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList13", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList13", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -771,7 +624,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList14", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList14", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -781,7 +634,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList15", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList15", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -791,7 +644,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList16", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList16", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -801,7 +654,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList17", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList17", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -811,7 +664,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList18", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList18", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -821,7 +674,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList19", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList19", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -831,7 +684,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList20", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList20", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -841,7 +694,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList21", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList21", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -851,7 +704,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList22", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList22", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -861,7 +714,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList23", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList23", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -871,7 +724,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList24", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList24", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -881,14 +734,14 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList5.opList25", 
+                                    "path": "system.switch_cpus.fuPool.FUList5.opList25", 
                                     "type": "OpDesc"
                                 }
                             ], 
                             "name": "FUList5", 
                             "eventq_index": 0, 
                             "cxx_class": "FUDesc", 
-                            "path": "system.cpu.fuPool.FUList5", 
+                            "path": "system.switch_cpus.fuPool.FUList5", 
                             "type": "FUDesc"
                         }, 
                         {
@@ -901,14 +754,14 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList6.opList", 
+                                    "path": "system.switch_cpus.fuPool.FUList6.opList", 
                                     "type": "OpDesc"
                                 }
                             ], 
                             "name": "FUList6", 
                             "eventq_index": 0, 
                             "cxx_class": "FUDesc", 
-                            "path": "system.cpu.fuPool.FUList6", 
+                            "path": "system.switch_cpus.fuPool.FUList6", 
                             "type": "FUDesc"
                         }, 
                         {
@@ -921,7 +774,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList7.opList0", 
+                                    "path": "system.switch_cpus.fuPool.FUList7.opList0", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -931,14 +784,14 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList7.opList1", 
+                                    "path": "system.switch_cpus.fuPool.FUList7.opList1", 
                                     "type": "OpDesc"
                                 }
                             ], 
                             "name": "FUList7", 
                             "eventq_index": 0, 
                             "cxx_class": "FUDesc", 
-                            "path": "system.cpu.fuPool.FUList7", 
+                            "path": "system.switch_cpus.fuPool.FUList7", 
                             "type": "FUDesc"
                         }, 
                         {
@@ -951,7 +804,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList8.opList0", 
+                                    "path": "system.switch_cpus.fuPool.FUList8.opList0", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -961,7 +814,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList8.opList1", 
+                                    "path": "system.switch_cpus.fuPool.FUList8.opList1", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -971,7 +824,7 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList8.opList2", 
+                                    "path": "system.switch_cpus.fuPool.FUList8.opList2", 
                                     "type": "OpDesc"
                                 }, 
                                 {
@@ -981,14 +834,14 @@
                                     "pipelined": true, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList8.opList3", 
+                                    "path": "system.switch_cpus.fuPool.FUList8.opList3", 
                                     "type": "OpDesc"
                                 }
                             ], 
                             "name": "FUList8", 
                             "eventq_index": 0, 
                             "cxx_class": "FUDesc", 
-                            "path": "system.cpu.fuPool.FUList8", 
+                            "path": "system.switch_cpus.fuPool.FUList8", 
                             "type": "FUDesc"
                         }, 
                         {
@@ -1001,112 +854,27 @@
                                     "pipelined": false, 
                                     "eventq_index": 0, 
                                     "cxx_class": "OpDesc", 
-                                    "path": "system.cpu.fuPool.FUList9.opList", 
+                                    "path": "system.switch_cpus.fuPool.FUList9.opList", 
                                     "type": "OpDesc"
                                 }
                             ], 
                             "name": "FUList9", 
                             "eventq_index": 0, 
                             "cxx_class": "FUDesc", 
-                            "path": "system.cpu.fuPool.FUList9", 
+                            "path": "system.switch_cpus.fuPool.FUList9", 
                             "type": "FUDesc"
                         }
                     ], 
                     "eventq_index": 0, 
                     "cxx_class": "FUPool", 
-                    "path": "system.cpu.fuPool", 
+                    "path": "system.switch_cpus.fuPool", 
                     "type": "FUPool"
                 }, 
                 "socket_id": 0, 
                 "renameToFetchDelay": 1, 
-                "icache": {
-                    "replacement_policy": {
-                        "eventq_index": 0, 
-                        "path": "system.cpu.icache.replacement_policy", 
-                        "type": "LRURP", 
-                        "name": "replacement_policy", 
-                        "cxx_class": "LRURP"
-                    }, 
-                    "cpu_side": {
-                        "peer": "system.cpu.icache_port", 
-                        "is_source": "False", 
-                        "role": "GEM5 RESPONDER"
-                    }, 
-                    "clusivity": "mostly_incl", 
-                    "prefetcher": null, 
-                    "system": "system", 
-                    "write_buffers": 8, 
-                    "response_latency": 2, 
-                    "cxx_class": "Cache", 
-                    "write_allocator": null, 
-                    "size": 32768, 
-                    "type": "Cache", 
-                    "clk_domain": "system.cpu_clk_domain", 
-                    "max_miss_count": 0, 
-                    "eventq_index": 0, 
-                    "default_p_state": "UNDEFINED", 
-                    "p_state_clk_gate_max": 1000000000000, 
-                    "mem_side": {
-                        "peer": "system.tol2bus.slave[0]", 
-                        "is_source": "True", 
-                        "role": "GEM5 REQUESTER"
-                    }, 
-                    "mshrs": 4, 
-                    "writeback_clean": true, 
-                    "p_state_clk_gate_min": 1000, 
-                    "tags": {
-                        "tag_latency": 2, 
-                        "replacement_policy": "system.cpu.icache.replacement_policy", 
-                        "name": "tags", 
-                        "p_state_clk_gate_min": 1000, 
-                        "eventq_index": 0, 
-                        "p_state_clk_gate_bins": 20, 
-                        "default_p_state": "UNDEFINED", 
-                        "warmup_percentage": 0, 
-                        "clk_domain": "system.cpu_clk_domain", 
-                        "indexing_policy": {
-                            "name": "indexing_policy", 
-                            "eventq_index": 0, 
-                            "assoc": 2, 
-                            "cxx_class": "SetAssociative", 
-                            "path": "system.cpu.icache.tags.indexing_policy", 
-                            "entry_size": 64, 
-                            "type": "SetAssociative", 
-                            "size": 32768
-                        }, 
-                        "system": "system", 
-                        "sequential_access": false, 
-                        "assoc": 2, 
-                        "power_model": [], 
-                        "cxx_class": "BaseSetAssoc", 
-                        "p_state_clk_gate_max": 1000000000000, 
-                        "path": "system.cpu.icache.tags", 
-                        "entry_size": 64, 
-                        "block_size": 64, 
-                        "type": "BaseSetAssoc", 
-                        "size": 32768
-                    }, 
-                    "tgts_per_mshr": 20, 
-                    "demand_mshr_reserve": 1, 
-                    "power_model": [], 
-                    "compressor": null, 
-                    "is_read_only": true, 
-                    "warmup_percentage": 0, 
-                    "prefetch_on_access": false, 
-                    "path": "system.cpu.icache", 
-                    "data_latency": 2, 
-                    "tag_latency": 2, 
-                    "name": "icache", 
-                    "addr_ranges": [
-                        "0:18446744073709551615"
-                    ], 
-                    "p_state_clk_gate_bins": 20, 
-                    "sequential_access": false, 
-                    "assoc": 2
-                }, 
-                "path": "system.cpu", 
+                "path": "system.switch_cpus", 
                 "numRobs": 1, 
-                "switched_out": false, 
+                "switched_out": true, 
                 "smtLSQPolicy": "Partitioned", 
                 "fetchBufferSize": 64, 
                 "wait_for_remote_gdb": false, 
@@ -1135,7 +903,7 @@
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIndirectPredictor", 
                         "indirectGHRBits": 13, 
-                        "path": "system.cpu.branchPred.indirectBranchPred", 
+                        "path": "system.switch_cpus.branchPred.indirectBranchPred", 
                         "type": "SimpleIndirectPredictor", 
                         "indirectPathLength": 3
                     }, 
@@ -1146,7 +914,7 @@
                     "BTBTagSize": 16, 
                     "BTBEntries": 4096, 
                     "cxx_class": "TournamentBP", 
-                    "path": "system.cpu.branchPred", 
+                    "path": "system.switch_cpus.branchPred", 
                     "localPredictorSize": 2048, 
                     "localHistoryTableSize": 2048, 
                     "type": "TournamentBP", 
@@ -1155,18 +923,121 @@
                 }, 
                 "LFSTSize": 1024, 
                 "isa": [
-                    {
-                        "eventq_index": 0, 
-                        "path": "system.cpu.isa", 
-                        "type": "X86ISA", 
-                        "name": "isa", 
-                        "cxx_class": "X86ISA::ISA"
-                    }
+                    "system.cpu.isa"
                 ], 
                 "smtROBPolicy": "Partitioned", 
                 "iewToFetchDelay": 1, 
                 "do_statistics_insts": true, 
                 "dispatchWidth": 8, 
+                "commitToDecodeDelay": 1, 
+                "smtIQPolicy": "Partitioned", 
+                "issueWidth": 8, 
+                "LSQCheckLoads": true, 
+                "commitToRenameDelay": 1, 
+                "system": "system", 
+                "checker": null, 
+                "numPhysFloatRegs": 256, 
+                "eventq_index": 0, 
+                "default_p_state": "UNDEFINED", 
+                "type": "DerivO3CPU", 
+                "wbWidth": 8, 
+                "numPhysVecRegs": 256, 
+                "interrupts": [], 
+                "numPhysVecPredRegs": 32, 
+                "cacheLoadPorts": 200, 
+                "smtCommitPolicy": "RoundRobin", 
+                "power_gating_on_idle": false, 
+                "issueToExecuteDelay": 1, 
+                "dtb": {
+                    "name": "dtb", 
+                    "eventq_index": 0, 
+                    "cxx_class": "X86ISA::TLB", 
+                    "walker": {
+                        "name": "walker", 
+                        "p_state_clk_gate_min": 1000, 
+                        "p_state_clk_gate_bins": 20, 
+                        "cxx_class": "X86ISA::Walker", 
+                        "clk_domain": "system.cpu_clk_domain", 
+                        "power_model": [], 
+                        "system": "system", 
+                        "eventq_index": 0, 
+                        "default_p_state": "UNDEFINED", 
+                        "p_state_clk_gate_max": 1000000000000, 
+                        "path": "system.switch_cpus.dtb.walker", 
+                        "type": "X86PagetableWalker", 
+                        "num_squash_per_cycle": 4
+                    }, 
+                    "path": "system.switch_cpus.dtb", 
+                    "type": "X86TLB", 
+                    "size": 64
+                }, 
+                "numROBEntries": 192, 
+                "fetchQueueSize": 32, 
+                "iewToCommitDelay": 1, 
+                "smtNumFetchingThreads": 1, 
+                "pwr_gating_latency": 300, 
+                "forwardComSize": 5, 
+                "do_checkpoint_insts": true, 
+                "cxx_class": "DerivO3CPU", 
+                "commitToIEWDelay": 1, 
+                "commitWidth": 8, 
+                "clk_domain": "system.cpu_clk_domain", 
+                "function_trace_start": 0, 
+                "smtFetchPolicy": "SingleThread", 
+                "profile": 0, 
+                "LSQDepCheckShift": 4, 
+                "trapLatency": 13, 
+                "iewToDecodeDelay": 1, 
+                "numPhysCCRegs": 1280, 
+                "renameToIEWDelay": 2, 
+                "p_state_clk_gate_bins": 20, 
+                "progress_interval": 0, 
+                "LQEntries": 32
+            }
+        ], 
+        "mem_mode": "atomic", 
+        "name": "system", 
+        "init_param": 0, 
+        "system_port": {
+            "peer": "system.membus.slave[0]", 
+            "is_source": "True", 
+            "role": "GEM5 REQUESTER"
+        }, 
+        "kernel_extras": [], 
+        "load_addr_mask": 18446744073709551615, 
+        "cpu": [
+            {
+                "do_statistics_insts": true, 
+                "numThreads": 1, 
+                "itb": {
+                    "name": "itb", 
+                    "eventq_index": 0, 
+                    "cxx_class": "X86ISA::TLB", 
+                    "walker": {
+                        "name": "walker", 
+                        "p_state_clk_gate_min": 1000, 
+                        "p_state_clk_gate_bins": 20, 
+                        "cxx_class": "X86ISA::Walker", 
+                        "clk_domain": "system.cpu_clk_domain", 
+                        "power_model": [], 
+                        "system": "system", 
+                        "eventq_index": 0, 
+                        "default_p_state": "UNDEFINED", 
+                        "p_state_clk_gate_max": 1000000000000, 
+                        "path": "system.cpu.itb.walker", 
+                        "type": "X86PagetableWalker", 
+                        "port": {
+                            "peer": "system.cpu.itb_walker_cache.cpu_side", 
+                            "is_source": "True", 
+                            "role": "GEM5 REQUESTER"
+                        }, 
+                        "num_squash_per_cycle": 4
+                    }, 
+                    "path": "system.cpu.itb", 
+                    "type": "X86TLB", 
+                    "size": 64
+                }, 
+                "power_gating_on_idle": false, 
                 "dtb_walker_cache": {
                     "replacement_policy": {
                         "eventq_index": 0, 
@@ -1252,16 +1123,16 @@
                     "sequential_access": false, 
                     "assoc": 2
                 }, 
-                "dcache": {
+                "icache": {
                     "replacement_policy": {
                         "eventq_index": 0, 
-                        "path": "system.cpu.dcache.replacement_policy", 
+                        "path": "system.cpu.icache.replacement_policy", 
                         "type": "LRURP", 
                         "name": "replacement_policy", 
                         "cxx_class": "LRURP"
                     }, 
                     "cpu_side": {
-                        "peer": "system.cpu.dcache_port", 
+                        "peer": "system.cpu.icache_port", 
                         "is_source": "False", 
                         "role": "GEM5 RESPONDER"
                     }, 
@@ -1272,7 +1143,7 @@
                     "response_latency": 2, 
                     "cxx_class": "Cache", 
                     "write_allocator": null, 
-                    "size": 65536, 
+                    "size": 32768, 
                     "type": "Cache", 
                     "clk_domain": "system.cpu_clk_domain", 
                     "max_miss_count": 0, 
@@ -1280,16 +1151,16 @@
                     "default_p_state": "UNDEFINED", 
                     "p_state_clk_gate_max": 1000000000000, 
                     "mem_side": {
-                        "peer": "system.tol2bus.slave[1]", 
+                        "peer": "system.tol2bus.slave[0]", 
                         "is_source": "True", 
                         "role": "GEM5 REQUESTER"
                     }, 
                     "mshrs": 4, 
-                    "writeback_clean": false, 
+                    "writeback_clean": true, 
                     "p_state_clk_gate_min": 1000, 
                     "tags": {
                         "tag_latency": 2, 
-                        "replacement_policy": "system.cpu.dcache.replacement_policy", 
+                        "replacement_policy": "system.cpu.icache.replacement_policy", 
                         "name": "tags", 
                         "p_state_clk_gate_min": 1000, 
                         "eventq_index": 0, 
@@ -1302,10 +1173,10 @@
                             "eventq_index": 0, 
                             "assoc": 2, 
                             "cxx_class": "SetAssociative", 
-                            "path": "system.cpu.dcache.tags.indexing_policy", 
+                            "path": "system.cpu.icache.tags.indexing_policy", 
                             "entry_size": 64, 
                             "type": "SetAssociative", 
-                            "size": 65536
+                            "size": 32768
                         }, 
                         "system": "system", 
                         "sequential_access": false, 
@@ -1313,23 +1184,23 @@
                         "power_model": [], 
                         "cxx_class": "BaseSetAssoc", 
                         "p_state_clk_gate_max": 1000000000000, 
-                        "path": "system.cpu.dcache.tags", 
+                        "path": "system.cpu.icache.tags", 
                         "entry_size": 64, 
                         "block_size": 64, 
                         "type": "BaseSetAssoc", 
-                        "size": 65536
+                        "size": 32768
                     }, 
                     "tgts_per_mshr": 20, 
                     "demand_mshr_reserve": 1, 
                     "power_model": [], 
                     "compressor": null, 
-                    "is_read_only": false, 
+                    "is_read_only": true, 
                     "warmup_percentage": 0, 
                     "prefetch_on_access": false, 
-                    "path": "system.cpu.dcache", 
+                    "path": "system.cpu.icache", 
                     "data_latency": 2, 
                     "tag_latency": 2, 
-                    "name": "dcache", 
+                    "name": "icache", 
                     "addr_ranges": [
                         "0:18446744073709551615"
                     ], 
@@ -1337,11 +1208,10 @@
                     "sequential_access": false, 
                     "assoc": 2
                 }, 
-                "commitToDecodeDelay": 1, 
-                "smtIQPolicy": "Partitioned", 
-                "issueWidth": 8, 
-                "LSQCheckLoads": true, 
-                "commitToRenameDelay": 1, 
+                "function_trace": false, 
+                "do_checkpoint_insts": true, 
+                "cxx_class": "AtomicSimpleCPU", 
+                "system": "system", 
                 "itb_walker_cache": {
                     "replacement_policy": {
                         "eventq_index": 0, 
@@ -1427,14 +1297,25 @@
                     "sequential_access": false, 
                     "assoc": 2
                 }, 
-                "system": "system", 
+                "clk_domain": "system.cpu_clk_domain", 
+                "function_trace_start": 0, 
+                "cpu_id": 0, 
+                "width": 1, 
                 "checker": null, 
-                "numPhysFloatRegs": 256, 
                 "eventq_index": 0, 
                 "default_p_state": "UNDEFINED", 
-                "type": "DerivO3CPU", 
-                "wbWidth": 8, 
-                "numPhysVecRegs": 256, 
+                "p_state_clk_gate_max": 1000000000000, 
+                "do_quiesce": true, 
+                "type": "AtomicSimpleCPU", 
+                "profile": 0, 
+                "icache_port": {
+                    "peer": "system.cpu.icache.cpu_side", 
+                    "is_source": "True", 
+                    "role": "GEM5 REQUESTER"
+                }, 
+                "p_state_clk_gate_bins": 20, 
+                "p_state_clk_gate_min": 1000, 
+                "syscallRetryLatency": 10000, 
                 "interrupts": [
                     {
                         "int_master": {
@@ -1471,11 +1352,53 @@
                         "type": "X86LocalApic"
                     }
                 ], 
-                "numPhysVecPredRegs": 32, 
-                "cacheLoadPorts": 200, 
-                "smtCommitPolicy": "RoundRobin", 
-                "power_gating_on_idle": false, 
-                "issueToExecuteDelay": 1, 
+                "dcache_port": {
+                    "peer": "system.cpu.dcache.cpu_side", 
+                    "is_source": "True", 
+                    "role": "GEM5 REQUESTER"
+                }, 
+                "socket_id": 0, 
+                "power_model": [], 
+                "max_insts_all_threads": 0, 
+                "simulate_data_stalls": false, 
+                "path": "system.cpu", 
+                "pwr_gating_latency": 300, 
+                "switched_out": false, 
+                "workload": [
+                    {
+                        "uid": 100, 
+                        "pid": 100, 
+                        "kvmInSE": false, 
+                        "cxx_class": "Process", 
+                        "executable": "/misc/scratch/thung/bench/hmmer_base.amd64-ee382n1", 
+                        "drivers": [], 
+                        "system": "system", 
+                        "gid": 100, 
+                        "eventq_index": 0, 
+                        "env": [], 
+                        "maxStackSize": 67108864, 
+                        "ppid": 0, 
+                        "type": "Process", 
+                        "cwd": "/misc/scratch/thung/new_hmmer", 
+                        "pgid": 100, 
+                        "simpoint": 0, 
+                        "euid": 100, 
+                        "input": "cin", 
+                        "path": "system.cpu.workload", 
+                        "name": "workload", 
+                        "cmd": [
+                            "/misc/scratch/thung/bench/hmmer_base.amd64-ee382n1", 
+                            "/misc/scratch/thung/bench/bombesin.hmm"
+                        ], 
+                        "errout": "cerr", 
+                        "useArchPT": false, 
+                        "egid": 100, 
+                        "release": "5.1.0", 
+                        "output": "cout"
+                    }
+                ], 
+                "name": "cpu", 
+                "wait_for_remote_gdb": false, 
                 "dtb": {
                     "name": "dtb", 
                     "eventq_index": 0, 
@@ -1504,38 +1427,115 @@
                     "type": "X86TLB", 
                     "size": 64
                 }, 
-                "numROBEntries": 192, 
-                "fetchQueueSize": 32, 
-                "iewToCommitDelay": 1, 
-                "smtNumFetchingThreads": 1, 
-                "pwr_gating_latency": 300, 
-                "forwardComSize": 5, 
-                "do_checkpoint_insts": true, 
-                "cxx_class": "DerivO3CPU", 
-                "commitToIEWDelay": 1, 
-                "commitWidth": 8, 
-                "clk_domain": "system.cpu_clk_domain", 
-                "function_trace_start": 0, 
-                "smtFetchPolicy": "SingleThread", 
-                "profile": 0, 
-                "icache_port": {
-                    "peer": "system.cpu.icache.cpu_side", 
-                    "is_source": "True", 
-                    "role": "GEM5 REQUESTER"
-                }, 
-                "dcache_port": {
-                    "peer": "system.cpu.dcache.cpu_side", 
-                    "is_source": "True", 
-                    "role": "GEM5 REQUESTER"
-                }, 
-                "LSQDepCheckShift": 4, 
-                "trapLatency": 13, 
-                "iewToDecodeDelay": 1, 
-                "numPhysCCRegs": 1280, 
-                "renameToIEWDelay": 2, 
-                "p_state_clk_gate_bins": 20, 
+                "simpoint_start_insts": [
+                    10000000, 
+                    40000000
+                ], 
+                "max_insts_any_thread": 0, 
+                "simulate_inst_stalls": false, 
                 "progress_interval": 0, 
-                "LQEntries": 32
+                "branchPred": null, 
+                "dcache": {
+                    "replacement_policy": {
+                        "eventq_index": 0, 
+                        "path": "system.cpu.dcache.replacement_policy", 
+                        "type": "LRURP", 
+                        "name": "replacement_policy", 
+                        "cxx_class": "LRURP"
+                    }, 
+                    "cpu_side": {
+                        "peer": "system.cpu.dcache_port", 
+                        "is_source": "False", 
+                        "role": "GEM5 RESPONDER"
+                    }, 
+                    "clusivity": "mostly_incl", 
+                    "prefetcher": null, 
+                    "system": "system", 
+                    "write_buffers": 8, 
+                    "response_latency": 2, 
+                    "cxx_class": "Cache", 
+                    "write_allocator": null, 
+                    "size": 65536, 
+                    "type": "Cache", 
+                    "clk_domain": "system.cpu_clk_domain", 
+                    "max_miss_count": 0, 
+                    "eventq_index": 0, 
+                    "default_p_state": "UNDEFINED", 
+                    "p_state_clk_gate_max": 1000000000000, 
+                    "mem_side": {
+                        "peer": "system.tol2bus.slave[1]", 
+                        "is_source": "True", 
+                        "role": "GEM5 REQUESTER"
+                    }, 
+                    "mshrs": 4, 
+                    "writeback_clean": false, 
+                    "p_state_clk_gate_min": 1000, 
+                    "tags": {
+                        "tag_latency": 2, 
+                        "replacement_policy": "system.cpu.dcache.replacement_policy", 
+                        "name": "tags", 
+                        "p_state_clk_gate_min": 1000, 
+                        "eventq_index": 0, 
+                        "p_state_clk_gate_bins": 20, 
+                        "default_p_state": "UNDEFINED", 
+                        "warmup_percentage": 0, 
+                        "clk_domain": "system.cpu_clk_domain", 
+                        "indexing_policy": {
+                            "name": "indexing_policy", 
+                            "eventq_index": 0, 
+                            "assoc": 2, 
+                            "cxx_class": "SetAssociative", 
+                            "path": "system.cpu.dcache.tags.indexing_policy", 
+                            "entry_size": 64, 
+                            "type": "SetAssociative", 
+                            "size": 65536
+                        }, 
+                        "system": "system", 
+                        "sequential_access": false, 
+                        "assoc": 2, 
+                        "power_model": [], 
+                        "cxx_class": "BaseSetAssoc", 
+                        "p_state_clk_gate_max": 1000000000000, 
+                        "path": "system.cpu.dcache.tags", 
+                        "entry_size": 64, 
+                        "block_size": 64, 
+                        "type": "BaseSetAssoc", 
+                        "size": 65536
+                    }, 
+                    "tgts_per_mshr": 20, 
+                    "demand_mshr_reserve": 1, 
+                    "power_model": [], 
+                    "compressor": null, 
+                    "is_read_only": false, 
+                    "warmup_percentage": 0, 
+                    "prefetch_on_access": false, 
+                    "path": "system.cpu.dcache", 
+                    "data_latency": 2, 
+                    "tag_latency": 2, 
+                    "name": "dcache", 
+                    "addr_ranges": [
+                        "0:18446744073709551615"
+                    ], 
+                    "p_state_clk_gate_bins": 20, 
+                    "sequential_access": false, 
+                    "assoc": 2
+                }, 
+                "isa": [
+                    {
+                        "eventq_index": 0, 
+                        "path": "system.cpu.isa", 
+                        "type": "X86ISA", 
+                        "name": "isa", 
+                        "cxx_class": "X86ISA::ISA"
+                    }
+                ], 
+                "tracer": {
+                    "eventq_index": 0, 
+                    "path": "system.cpu.tracer", 
+                    "type": "ExeTracer", 
+                    "name": "tracer", 
+                    "cxx_class": "Trace::ExeTracer"
+                }
             }
         ], 
         "multi_thread": false, 

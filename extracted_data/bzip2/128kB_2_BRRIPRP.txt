@@ -1,13 +1,17 @@
 simpoint 0
-	Total number of instructions: 40000001
-	Total number of cycles: 74380502
+	Total number of instructions: 30000000
+	CPI: 1.518854
+	Total number of cycles: 45565612
 simpoint 1
-	Total number of instructions: 40000002
-	Total number of cycles: 74380025
+	Total number of instructions: 30000003
+	CPI: 1.514311
+	Total number of cycles: 45429343
 simpoint 2
-	Total number of instructions: 40000001
-	Total number of cycles: 74379086
+	Total number of instructions: 30000001
+	CPI: 1.441166
+	Total number of cycles: 43234989
 simpoint 3
-	Total number of instructions: 40000002
-	Total number of cycles: 54029514
-weighted_cpi:1.6246875346495278
+	Total number of instructions: 30000003
+	CPI: 4.795353
+	Total number of cycles: 143860609
+weighted_cpi:3.0215181631812933
